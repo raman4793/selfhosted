@@ -1,0 +1,17 @@
+services:
+  filebrowser:
+    container_name: filebrowser
+    image: filebrowser/filebrowser
+    volumes:
+      - "/home/ram:/srv:ro"
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filebrowser.rule=Host(`filebrowser.precious.home`)"
+    networks:
+      lan: {}
+
+networks:
+  lan:
+    external: true
+
