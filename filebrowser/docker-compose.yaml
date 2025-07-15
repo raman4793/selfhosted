@@ -10,7 +10,6 @@ services:
       - "traefik.http.routers.filebrowser.tls=${TLS_ENABLED}"
       - "traefik.http.routers.filebrowser.rule=Host(`filebrowser.${DOMAIN}`)"
       - "traefik.http.routers.filebrowser.entrypoints=${WEB_ENTRYPOINT}"
-      - "traefik.http.services.filebrowser.loadbalancer.server.port=8080"
     networks:
       lan: {}
 
