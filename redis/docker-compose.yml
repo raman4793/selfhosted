@@ -1,0 +1,16 @@
+services:
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:${VERSION}
+    healthcheck:
+      test: redis-cli ping || exit 1
+    restart: always
+    volumes:
+      - ${MOUNT}/cache:/data
+    networks:
+      lan: {}
+
+networks:
+  lan:
+    external: true
