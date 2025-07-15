@@ -1,0 +1,48 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    hostname: openwebui
+    container_name: openwebui
+    ports:
+      - "8181:8080"
+    volumes:
+      - type: bind
+        source: ${OPEN_WEB_UI_MOUNT}/data
+        target: /app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
+      - "traefik.http.routers.openwebui.rule=Host(`chat.${DOMAIN}`)"
+      - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
+      - "traefik.http.services.portainer.loadbalancer.server.port=8080"
+    networks:
+      lan: {}
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    hostname: mcpo
+    container_name: mcpo
+    environment:
+      - MCPO_API_KEY=${OPEN_WEB_UI_MCP_API_KEY}
+    volumes:
+      - ${OPEN_WEB_UI_MOUNT}/mcpo.json:/app/config/config.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mcp.tls=${TLS_ENABLED}"
+      - "traefik.http.routers.mcp.rule=Host(`mcp.${DOMAIN}`)"
+      - "traefik.http.routers.mcp.entrypoints=${WEB_ENTRYPOINT}"
+      - "traefik.http.services.mcp.loadbalancer.server.port=8000"
+    networks:
+      lan: {}
+    healthcheck:
+      test: CMD curl -f http://localhost:8000/docs
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks: 
+  lan:
+    external: true
