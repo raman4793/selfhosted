@@ -44,6 +44,8 @@ services:
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      lan: {}
 
   whoami:
     image: traefik/whoami:v1.10
@@ -54,3 +56,8 @@ services:
       - "traefik.http.routers.whoami.tls=${TLS_ENABLED}"
       - "traefik.http.routers.whoami.rule=Host(`whoami.${DOMAIN}`)"
       - "traefik.http.routers.whoami.entrypoints=${WEB_ENTRYPOINT}"
+    networks:
+      lan: {}
+networks:
+  lan:
+    external: true
