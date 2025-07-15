@@ -31,8 +31,16 @@ services:
       - DUCKDNS_TOKEN=${DUCKDNS_TOKEN}
     labels:
       - "traefik.enable=true"
-      - "traefik.backend=dashboard"
-      - "traefik.frontend.rule=Host:dashboard.${DOMAIN}"
+      # Dashboard router
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+      # - "traefik.backend=dashboard"
+      # - "traefik.frontend.rule=Host:dashboard.${DOMAIN}"
+      # - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      # - "traefik.http.services.traefik.loadbalancer.server.port=2283"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
