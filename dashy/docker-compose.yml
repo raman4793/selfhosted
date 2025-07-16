@@ -1,0 +1,21 @@
+name: dashy
+services:
+  dashy:
+    image: lissy93/dashy:latest
+      # ports:
+      #     - 8080:8080
+    volumes:
+        - ${MOUNT}/my-conf.yml:/app/user-data/conf.yml
+    container_name: dashy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashy.tls=${TLS_ENABLED}"
+      - "traefik.http.routers.dashy.rule=Host(`dashy.${DOMAIN}`)"
+      - "traefik.http.routers.dashy.entrypoints=${WEB_ENTRYPOINT}"
+      - "traefik.http.services.dashy.loadbalancer.server.port=8080"
+    networks:
+      lan: {}
+
+networks:
+  lan:
+    external: true
