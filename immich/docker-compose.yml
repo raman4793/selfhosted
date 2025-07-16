@@ -4,6 +4,20 @@ services:
   immich:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    environment:
+      - UPLOAD_LOCATION=${UPLOAD_LOCATION}
+      - TZ=${TZ}
+      # The Immich version to use. You can pin this to a specific version like "v1.71.0"
+      - IMMICH_VERSION=${IMMICH_VERSION}
+      # Connection secret for postgres. You should change it to a random password
+      - DB_HOSTNAME=${DB_HOSTNAME}
+      # Please use only the characters `A-Za-z0-9`, without special characters or spaces
+      - DB_PASSWORD=${DB_PASSWORD}
+      # The values below this line do not need to be changed
+      ###################################################################################
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_DATABASE_NAME=${DB_DATABASE_NAME}
+      - REDIS_HOSTNAME=${REDIS_HOSTNAME}
     # extends:
     #   file: hwaccel.transcoding.yml
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
