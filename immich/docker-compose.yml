@@ -19,7 +19,6 @@ services:
       - "traefik.http.routers.photos.rule=Host(`photos.${DOMAIN}`)"
       - "traefik.http.routers.photos.entrypoints=${WEB_ENTRYPOINT}"
       - "traefik.http.services.photos.loadbalancer.server.port=2283"
-    restart: always
     healthcheck:
       disable: false
     networks:
