@@ -8,6 +8,7 @@ services:
     command:
       # Debug Properties
       - "--log.level=DEBUG"
+      - "--api=true"
       #- "--api.insecure=true"
       # Common Properties
       - "--providers.docker=true"
