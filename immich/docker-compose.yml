@@ -25,8 +25,8 @@ services:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-    # ports:
-    #   - '2283:2283'
+    ports:
+      - '2283:2283'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.photos.tls=${TLS_ENABLED}"
