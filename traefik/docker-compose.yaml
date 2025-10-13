@@ -16,6 +16,8 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=0s"
+      - "--entrypoints.web.transport.respondingTimeouts.readTimeout=0s"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       # SSL/TLS Properties
       - "--entrypoints.websecure.http.tls.certResolver=myresolver"
