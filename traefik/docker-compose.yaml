@@ -9,6 +9,8 @@ services:
       # Debug Properties
       - "--log.level=DEBUG"
       - "--api=true"
+      - "--tracing=true"
+      - "--metrics.otlp=true"
       #- "--api.insecure=true"
       # Common Properties
       - "--providers.docker=true"
