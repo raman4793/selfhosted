@@ -7,10 +7,10 @@ services:
         image: hoppscotch/hoppscotch-frontend
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch.${DOMAIN}`)"
-          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-          - "traefik.http.services.openwebui.loadbalancer.server.port=3000"
+          - "traefik.http.routers.hoppscotch.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.hoppscotch.rule=Host(`hoppscotch.${DOMAIN}`)"
+          - "traefik.http.routers.hoppscotch.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.hoppscotch.loadbalancer.server.port=3000"
         networks:
           lan: {}
     hoppscotch-backend:
@@ -20,10 +20,10 @@ services:
         image: hoppscotch/hoppscotch-backend
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-backend.${DOMAIN}`)"
-          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-          - "traefik.http.services.openwebui.loadbalancer.server.port=3170"
+          - "traefik.http.routers.hoppscotch-backend.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.hoppscotch-backend.rule=Host(`hoppscotch-backend.${DOMAIN}`)"
+          - "traefik.http.routers.hoppscotch-backend.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.hoppscotch-backend.loadbalancer.server.port=3170"
         networks:
           lan: {}
     hoppscotch-admin:
@@ -33,10 +33,10 @@ services:
         image: hoppscotch/hoppscotch-admin
         labels:
           - "traefik.enable=true"
-          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-admin.${DOMAIN}`)"
-          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-          - "traefik.http.services.openwebui.loadbalancer.server.port=3100"
+          - "traefik.http.routers.hoppscotch-admin.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.hoppscotch-admin.rule=Host(`hoppscotch-admin.${DOMAIN}`)"
+          - "traefik.http.routers.hoppscotch-admin.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.hoppscotch-admin.loadbalancer.server.port=3100"
         networks:
           lan: {}
 networks: 
