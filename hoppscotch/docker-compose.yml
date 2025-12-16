@@ -5,37 +5,40 @@ services:
             - .env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-frontend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-      - "traefik.http.routers.openwebui.rule=Host(`hoppscotch.${DOMAIN}`)"
-      - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-      - "traefik.http.services.openwebui.loadbalancer.server.port=3000"
-    networks:
-      lan: {}
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch.${DOMAIN}`)"
+          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.openwebui.loadbalancer.server.port=3000"
+        networks:
+          lan: {}
     hoppscotch-backend:
         env_file:
             - .env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-backend
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-      - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-backend.${DOMAIN}`)"
-      - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-      - "traefik.http.services.openwebui.loadbalancer.server.port=3170"
-    networks:
-      lan: {}
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-backend.${DOMAIN}`)"
+          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.openwebui.loadbalancer.server.port=3170"
+        networks:
+          lan: {}
     hoppscotch-admin:
         env_file:
             - .env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-admin
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
-      - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-admin.${DOMAIN}`)"
-      - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
-      - "traefik.http.services.openwebui.loadbalancer.server.port=3100"
-    networks:
-      lan: {}
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.openwebui.tls=${TLS_ENABLED}"
+          - "traefik.http.routers.openwebui.rule=Host(`hoppscotch-admin.${DOMAIN}`)"
+          - "traefik.http.routers.openwebui.entrypoints=${WEB_ENTRYPOINT}"
+          - "traefik.http.services.openwebui.loadbalancer.server.port=3100"
+        networks:
+          lan: {}
+networks: 
+  lan:
+    external: true
