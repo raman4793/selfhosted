@@ -2,7 +2,7 @@ name: hoppscotch
 services:
     hoppscotch-frontend:
         env_file:
-            - .env
+          - stack.env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-frontend
         labels:
@@ -15,7 +15,7 @@ services:
           lan: {}
     hoppscotch-backend:
         env_file:
-            - .env
+          - stack.env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-backend
         labels:
@@ -28,7 +28,7 @@ services:
           lan: {}
     hoppscotch-admin:
         env_file:
-            - .env
+          - stack.env
         restart: unless-stopped
         image: hoppscotch/hoppscotch-admin
         labels:
