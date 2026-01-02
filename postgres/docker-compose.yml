@@ -14,7 +14,10 @@ services:
       - ${MOUNT}/postgres:/var/lib/postgresql/data
     shm_size: 128mb
     labels:
-      - "traefik.enable=false"
+      - "traefik.enable=true"
+      - "traefik.http.routers.psql.tls=${TLS_ENABLED}"
+      - "traefik.http.routers.psql.rule=Host(`psql.${DOMAIN}`)"
+      - "traefik.http.routers.psql.entrypoints=${WEB_ENTRYPOINT}"
     restart: always
     networks:
       lan: {}
